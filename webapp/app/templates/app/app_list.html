@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Appリスト</h1>
+<a href="{% url 'app:create' %}">追加</a>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">App</th>
+      <th scope="col">作成日時</th>
+      <th scope="col">更新日時</th>
+      <th scope="col">操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in object_list %}
+    <tr>
+      <td scope="row"><a href="{% url 'app:detail' pk=item.id %}">{{ item.id }}</a></td>
+      <td>{{ item.app }}</td>
+      <td>{{ item.created_at }}</td>
+      <td>{{ item.updated_at }}</td>
+      <td>
+        <a href="{% url 'app:update' pk=item.id %}">修正</a>
+        <a href="{% url 'app:delete' pk=item.id %}">削除</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{%endblock%}
